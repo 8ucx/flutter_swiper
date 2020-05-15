@@ -1,3 +1,5 @@
+# 修正 Rect 指示器無法正常顯示
+
 ![Logo](banner.jpg)
 
 <p align="center">
