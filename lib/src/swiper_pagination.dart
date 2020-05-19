@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class FractionPaginationBuilder extends SwiperPlugin {
   ///color ,if set null , will be Theme.of(context).scaffoldBackgroundColor
@@ -19,12 +18,11 @@ class FractionPaginationBuilder extends SwiperPlugin {
 
   final Key key;
 
-  const FractionPaginationBuilder(
-      {this.color,
-      this.fontSize: 20.0,
-      this.key,
-      this.activeColor,
-      this.activeFontSize: 35.0});
+  const FractionPaginationBuilder({this.color,
+    this.fontSize: 20.0,
+    this.key,
+    this.activeColor,
+    this.activeFontSize: 35.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
@@ -88,13 +86,15 @@ class RectSwiperPaginationBuilder extends SwiperPlugin {
 
   final Key key;
 
-  const RectSwiperPaginationBuilder(
-      {this.activeColor,
-      this.color,
-      this.key,
-      this.size: const Size(10.0, 2.0),
-      this.activeSize: const Size(10.0, 2.0),
-      this.space: 3.0});
+  final double radius;
+
+  const RectSwiperPaginationBuilder({this.activeColor,
+    this.color,
+    this.key,
+    this.size: const Size(10.0, 2.0),
+    this.activeSize: const Size(10.0, 2.0),
+    this.space: 3.0,
+    this.radius});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
@@ -118,7 +118,8 @@ class RectSwiperPaginationBuilder extends SwiperPlugin {
       list.add(Container(
         width: size.width,
         height: size.height,
-        color: active ? activeColor : color,
+        decoration: BoxDecoration(color: active ? activeColor : color,
+          borderRadius: BorderRadius.circular(radius ?? 0),),
         key: Key("pagination_$i"),
         margin: EdgeInsets.all(space),
       ));
@@ -158,13 +159,12 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
 
   final Key key;
 
-  const DotSwiperPaginationBuilder(
-      {this.activeColor,
-      this.color,
-      this.key,
-      this.size: 10.0,
-      this.activeSize: 10.0,
-      this.space: 3.0});
+  const DotSwiperPaginationBuilder({this.activeColor,
+    this.color,
+    this.key,
+    this.size: 10.0,
+    this.activeSize: 10.0,
+    this.space: 3.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig config) {
@@ -230,8 +230,8 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
   }
 }
 
-typedef Widget SwiperPaginationBuilder(
-    BuildContext context, SwiperPluginConfig config);
+typedef Widget SwiperPaginationBuilder(BuildContext context,
+    SwiperPluginConfig config);
 
 class SwiperCustomPagination extends SwiperPlugin {
   final SwiperPaginationBuilder builder;
@@ -265,11 +265,10 @@ class SwiperPagination extends SwiperPlugin {
 
   final Key key;
 
-  const SwiperPagination(
-      {this.alignment,
-      this.key,
-      this.margin: const EdgeInsets.all(10.0),
-      this.builder: SwiperPagination.dots});
+  const SwiperPagination({this.alignment,
+    this.key,
+    this.margin: const EdgeInsets.all(10.0),
+    this.builder: SwiperPagination.dots});
 
   Widget build(BuildContext context, SwiperPluginConfig config) {
     Alignment alignment = this.alignment ??
